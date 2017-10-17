@@ -10,23 +10,14 @@ void sigchild_handler(int sig)
     printf("Child died!\n");
     printf("pid: %d, sock: %d\n", p, sockets[p]);
     close(sockets[p]);
-    signal(SIGCHLD, sigchild_handler);
-    // do_listen();
   }
 }
 
 int exec_comm_handler(int sck, int conn_num)
 {
-
-  // char buf[64];
-  // snprintf(buf, sizeof(buf)*sizeof(buf[0]), "./logs/connection_%d.log", conn_num);
-  // printf("%s\n", buf);
-
   close(0);
   close(1);
   close(2);
-
-  // stdout = freopen(buf, "w", stdout);
 
   if( dup(sck) != 0 || dup(sck) != 1 || dup(sck) != 2) {
     perror("error duplicating socket for stdin/stdout/stderr");
@@ -43,7 +34,6 @@ void do_listen()
   int client;
   pid_t child_pid;
   struct sockaddr_in peer_addr;
-
 
   while((client = accept(sck, (struct sockaddr*) &peer_addr, &addrlen )) != -1) {
     printf("got connection\n");
