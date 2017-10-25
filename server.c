@@ -7,7 +7,7 @@ void sigchild_handler(int sig)
 
   while ((p=waitpid(-1, &status, WUNTRACED)) != -1)
   {
-    printf("Child died!\n");
+    printf("Child died with exit code %d\n", status);
     printf("pid: %d, sock: %d\n", p, sockets[p]);
     close(sockets[p]);
   }
@@ -24,7 +24,7 @@ int exec_comm_handler(int sck, int conn_num)
     exit(1);
   }
   printf("this should now go across the socket...\n");
-  execl("./test", "", NULL);
+  execl("../buffer_overflow/overflow", "", NULL);
   perror("the execl(3) call failed.");
   exit(1);
 }

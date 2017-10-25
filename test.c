@@ -10,8 +10,6 @@ int main(int argc, char const *argv[])
   printf("%s\n%s\n", "test function", buf);
 
   fflush(stdout);
-  close(stdout);
-  close(stdin);
-  close(stderr);
 
+  return 0;
 }
