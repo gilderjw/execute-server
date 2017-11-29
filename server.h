@@ -17,5 +17,5 @@ static int addrlen;
 static int sockets[MAX_PID]; 
 
 void sigchild_handler(int sig);
-int exec_comm_handler(int sck, int conn_num);
-void do_listen();
+int exec_comm_handler(int sck, int conn_num, const char* exe_path);
+void do_listen(const char* exe_path);
